@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -48,6 +48,21 @@ html,body{
       </ul>
     </div>
   </div>
+</div>
+<div id="clickPrompt" style="
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 24px;
+  z-index: 10000;
+  cursor: pointer;
+">
+  点击解冻刘德华
 </div>
 <script>
 // 初始化变量
@@ -372,6 +387,17 @@ musicToggle.addEventListener('click', function() {
     bgMusic.pause();
     musicToggle.style.background = 'rgba(255,255,255,0.2)';
   }
+});
+</script>
+
+<script>
+// 添加点击事件，点击后隐藏提示框
+document.getElementById('clickPrompt').addEventListener('click', function() {
+  this.style.display = 'none';
+  // 同时尝试播放音乐
+  bgMusic.play().catch(function(error) {
+    console.log("播放失败:", error);
+  });
 });
 </script>
 </body>
