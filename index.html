@@ -161,23 +161,23 @@
         let text = $('#text p').map(function() {
             return $(this).text();
         }).get();
-        let str = '';
+        let str = [];
         let i = 0;
         let j = 0;
         let content = document.getElementById('contents');
         let timer = setInterval(() => {
             if (j < text.length) {
                 if (i < text[j].length) {
-                    str += text[j][i++];
-                    content.innerHTML = '<p>' + str + '<span class="blink">|</span></p>';
+                    if (str[j] === undefined) str[j] = '';
+                    str[j] += text[j][i++];
+                    content.innerHTML = str.map(line => `<p>${line}</p>`).join('') + '<span class="blink">|</span>';
                 } else {
-                    str += '\n';  // 每句话结束添加换行
                     i = 0;
                     j++;
                 }
             } else {
                 clearInterval(timer);
-                content.innerHTML = '<p>' + str + '</p>';
+                content.innerHTML = str.map(line => `<p>${line}</p>`).join('');
             }
         }, 100);
     }
